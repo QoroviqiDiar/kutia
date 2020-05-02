@@ -2,7 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Role;
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class AdminPermission
 {
@@ -15,6 +17,11 @@ class AdminPermission
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        if (Auth::check() && Auth::user()->hasAnyRole([Role::ADMIN, Role::EDITOR, Role::AUTHOR]))
+        {
+            return $next($request);
+        }
+
+        return redirect('home');
     }
 }
