@@ -52,6 +52,11 @@ class User extends Authenticatable
         return null !== $this->roles()->whereIn('name', $roles)->first();
     }
 
+    public function isAdminOrEditor()
+    {
+        return $this->hasAnyRole([Role::ADMIN, Role::EDITOR]);
+    }
+
     public function hasRole($role)
     {
         return null !== $this->roles()->where('name', $role)->first();

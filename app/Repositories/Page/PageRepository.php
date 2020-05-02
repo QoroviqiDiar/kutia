@@ -25,6 +25,11 @@ class PageRepository implements PageRepositoryInterface
         return $pages;
     }
 
+    public function getUserPages($user)
+    {
+        return $pages = $user->pages()->get();
+    }
+
     public function save($attributes)
     {
         return $this->model->create($attributes);

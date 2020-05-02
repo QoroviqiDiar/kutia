@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PageRequest;
 use App\Page;
 use App\Repositories\Page\PageRepositoryInterface;
+use App\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,6 +17,7 @@ class PagesController extends Controller
     public function __construct(PageRepositoryInterface $pageRepository)
     {
         $this->pageRepository = $pageRepository;
+        $this->middleware('admin');
     }
 
     /**
@@ -23,7 +25,12 @@ class PagesController extends Controller
      */
     public function index()
     {
-        $pages = $this->pageRepository->getAll();
+        $user = Auth::user();
+        if ($user->isAdminOrEditor()){
+            $pages = $this->pageRepository->getAll();
+        } else {
+            $pages = $this->pageRepository->getUserPages($user);
+        }
         return view('admin.pages.index', ['pages' => $pages]);
     }
 
@@ -64,6 +71,9 @@ class PagesController extends Controller
      */
     public function edit(Page $page)
     {
+        if (Auth::user()->cant('update', $page)) {
+            return redirect()->route('pages.index');
+        }
         return view('admin.pages.edit',  ['model' => $page]);
     }
 
@@ -75,6 +85,9 @@ class PagesController extends Controller
      */
     public function update(PageRequest $request, Page $page)
     {
+        if (Auth::user()->cant('update', $page)) {
+            return redirect()->route('pages.index');
+        }
         $this->pageRepository->update($page, $request->all());
         return redirect()->route('pages.index');
     }
@@ -83,10 +96,11 @@ class PagesController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Page  $page
-     * @return \Illuminate\Http\Response
      */
     public function destroy(Page $page)
     {
-        //
+        if (Auth::user()->cant('update', $page)) {
+            return redirect()->route('pages.index');
+        }
     }
 }
