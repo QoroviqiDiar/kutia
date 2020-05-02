@@ -9,10 +9,29 @@ use App\Page;
 class PageRepository implements PageRepositoryInterface
 {
 
+    /**
+     * @var Page
+     */
+    private $model;
+
+    public function __construct(Page $page)
+    {
+        $this->model = $page;
+    }
+
     public function getAll()
     {
-        $pages = Page::all();
-        $pages = [];
+        $pages = $this->model->all();
         return $pages;
+    }
+
+    public function save($attributes)
+    {
+        return $this->model->create($attributes);
+    }
+
+    public function update($entity, $attributes)
+    {
+        return $entity->update($attributes);
     }
 }
