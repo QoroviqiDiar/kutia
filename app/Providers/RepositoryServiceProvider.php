@@ -17,6 +17,11 @@ class RepositoryServiceProvider extends ServiceProvider
             'App\Repositories\Page\PageRepositoryInterface',
             'App\Repositories\Page\PageRepository'
         );
+
+        $this->app->bind(
+            'App\Repositories\User\UserRepositoryInterface',
+            'App\Repositories\User\UserRepository'
+        );
     }
 
     /**
