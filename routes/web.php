@@ -18,12 +18,12 @@ Route::get('/', function () {
 });
 
 Route::get('/admin', function () {
-    return 'admin/editor/author';
+    return view('admin.index');
 })->middleware('admin');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('admin/pages', 'Admin\PagesController');
+Route::resource('admin/pages', 'Admin\PagesController', ['except' => ['show']]);
 

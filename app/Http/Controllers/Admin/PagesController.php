@@ -53,16 +53,6 @@ class PagesController extends Controller
         return redirect()->route('pages.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Page  $page
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Page $page)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
