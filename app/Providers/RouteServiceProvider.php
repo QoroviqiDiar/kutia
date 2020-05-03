@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Schema;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -62,9 +63,11 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->namespace)
             ->group(base_path('routes/web.php'));
 
-        if($pages = \App\Page::all()){
-            foreach ($pages as $page) {
-                Route::view($page->slug, 'front.page', ['page' => $page]);
+        if (Schema::hasTable('pages')){
+            if($pages = \App\Page::all()){
+                foreach ($pages as $page) {
+                    Route::view($page->slug, 'front.page', ['page' => $page]);
+                }
             }
         }
     }
