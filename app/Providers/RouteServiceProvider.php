@@ -63,7 +63,7 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->namespace)
             ->group(base_path('routes/web.php'));
 
-        if (Schema::hasTable('pages')){
+        if (! app()->runningInConsole()) {
             if($pages = \App\Page::all()){
                 foreach ($pages as $page) {
                     Route::view($page->slug, 'front.page', ['page' => $page]);
