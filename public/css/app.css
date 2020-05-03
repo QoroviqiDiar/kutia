@@ -10907,3 +10907,19 @@ a.text-dark:focus {
   font-size: 30px;
 }
 
+.front__navbar--item a {
+  margin-right: 10px;
+  color: #000;
+  text-transform: capitalize;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.front__navbar--item:hover {
+  transform: scale(1.125);
+}
+
+.front__navbar--item:hover a {
+  color: #3490dc;
+}
+

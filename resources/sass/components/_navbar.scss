@@ -1,0 +1,18 @@
+.front__navbar {
+    &--item {
+        a {
+            margin-right: 10px;
+            color: $black;
+            text-transform: capitalize;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        &:hover {
+            transform: scale(1.125);
+            a {
+                color: $blue;
+            }
+        }
+    }
+}

@@ -1,6 +1,6 @@
 @foreach($pages as $page)
-    <li>
-        <a href="{{ $page->slug }}">
+    <li class="front__navbar--item">
+        <a href="{{ $page->slug }}" class="front__navbar--link">
             {{ $page->title }}
         </a>
     </li>
