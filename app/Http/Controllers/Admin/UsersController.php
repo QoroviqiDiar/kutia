@@ -22,6 +22,8 @@ class UsersController extends Controller
     {
         $this->userRepository = $userRepository;
         $this->roleRepository = $roleRepository;
+        $this->middleware('admin');
+        $this->middleware('can:manageUsers, App\User');
     }
 
 
@@ -42,7 +44,7 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         if (Auth::user()->id == $user->id) {
-            return redirect()->route('users.index');
+            return redirect()->route('users.index')->with('status', 'You cannot edit yourself!');
         }
 
         $roles = $this->roleRepository->getAll();
@@ -61,11 +63,11 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         if (Auth::user()->id == $user->id) {
-            return redirect()->route('users.index');
+            return redirect()->route('users.index')->with('status', 'You cannot edit yourself!');;
         }
 
         $this->userRepository->updateUserRoles($user, $request->roles);
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('success', "$user->name was updated successfully");
     }
 
     /**

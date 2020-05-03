@@ -27,9 +27,9 @@ class PagesController extends Controller
     {
         $user = Auth::user();
         if ($user->isAdminOrEditor()){
-            $pages = $this->pageRepository->getAll();
+            $pages = $this->pageRepository->getAllWithPagination();
         } else {
-            $pages = $this->pageRepository->getUserPages($user);
+            $pages = $this->pageRepository->getAllUserPagesWithPagination($user, 1);
         }
         return view('admin.pages.index', ['pages' => $pages]);
     }
@@ -50,7 +50,7 @@ class PagesController extends Controller
     public function store(PageRequest $request)
     {
         $page = $this->pageRepository->save($request->all());
-        return redirect()->route('pages.index');
+        return redirect()->route('pages.index')->with('success', "Page was created successfully");
     }
 
 
@@ -79,7 +79,7 @@ class PagesController extends Controller
             return redirect()->route('pages.index');
         }
         $this->pageRepository->update($page, $request->all());
-        return redirect()->route('pages.index');
+        return redirect()->route('pages.index')->with('success', "$page->title was updated successfully");
     }
 
     /**

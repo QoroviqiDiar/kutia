@@ -39,4 +39,14 @@ class PageRepository implements PageRepositoryInterface
     {
         return $entity->update($attributes);
     }
+
+    public function getAllWithPagination($limit = 8)
+    {
+        return $this->model->paginate($limit);
+    }
+
+    public function getAllUserPagesWithPagination($user, $limit = 8)
+    {
+        return $pages = $user->pages()->paginate($limit);
+    }
 }
