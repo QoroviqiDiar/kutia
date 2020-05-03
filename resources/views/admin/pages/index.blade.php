@@ -20,7 +20,8 @@
                     </div>
                 @endif
                 <div class="pages">
-                    <h1 class="pages__title">Pages <a href="{{ route('pages.create') }}" class="btn btn-primary">Create</a></h1>
+                    <h1 class="pages__title">Pages <a href="{{ route('pages.create') }}"
+                                                      class="btn btn-primary">Create</a></h1>
 
                     <div class="pages__wrapper">
 
@@ -32,6 +33,7 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Title</th>
                                     <th scope="col">Url</th>
+                                    <th scope="col"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -39,11 +41,22 @@
                                     <tr>
                                         <th scope="row">{{ $page->id }}</th>
                                         <td>
-                                            <a href="{{ route('pages.edit', ['page' => $page->id]) }}" class="pages__link--title">
+                                            <a href="{{ route('pages.edit', ['page' => $page->id]) }}"
+                                               class="pages__link--title">
                                                 {{ $page->title }}
                                             </a>
                                         </td>
                                         <td>{{ $page->slug }}</td>
+                                        <td class="text-right">
+                                            <form action="{{ route('pages.destroy', ['page' => $page->id]) }}"
+                                                  id="delete-form" method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button form="delete-form" class="btn btn-sm btn-danger">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>

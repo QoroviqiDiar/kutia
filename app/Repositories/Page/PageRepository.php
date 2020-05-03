@@ -49,4 +49,9 @@ class PageRepository implements PageRepositoryInterface
     {
         return $pages = $user->pages()->paginate($limit);
     }
+
+    public function delete($entity)
+    {
+        return $entity->delete();
+    }
 }

@@ -18,4 +18,6 @@ interface PageRepositoryInterface
 
     public function update($entity, $attributes);
 
+    public function delete($entity);
+
 }
