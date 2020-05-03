@@ -11,7 +11,8 @@ CMS Kutia
 6. Migrate the Database `php artisan migrate`.
 7. Run `php artisan key:generate`
 8. Run `php artisan db:seed` (This will generate super-admin & basic settings [required]).
-9. Visit URL in the browser
+9. Run `php artisan storage:link`
+10. Visit URL in the browser
 
 ##### Default Login Credential for admin
 | Username           | Password |

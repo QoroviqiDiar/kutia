@@ -42,7 +42,7 @@
                                     <a href="{{ $file->getFilePath($file->file) }}"
                                        target="_blank">{{ $file->original_name }}</a>
                                 </td>
-                                <td>{{ $file->description }}</td>
+                                <td>{!! $file->description !!} </td>
                                 <td>
                                     @if(Auth::user()->isAdminOrEditor())
                                         <form action="{{ route('files.destroy', ['file' => $file->id]) }}" method="POST">
@@ -62,7 +62,6 @@
                     <div class="col-12">
                         <h4 class="text-center">
                             No files found.
-                            <a href="{{ route('files.create') }}">Upload a file</a>
                         </h4>
                     </div>
                 @endif
