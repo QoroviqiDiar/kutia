@@ -24,5 +24,5 @@ Auth::routes(['register' => false]);
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('admin/pages', 'Admin\PagesController', ['except' => ['show']]);
-Route::resource('admin/users', 'Admin\UsersController', ['except' => ['show', 'store', 'create']]);
+Route::resource('admin/users', 'Admin\UsersController', ['except' => ['show']]);
 

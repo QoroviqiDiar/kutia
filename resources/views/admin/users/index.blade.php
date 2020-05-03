@@ -21,7 +21,7 @@
                 @endif
 
                 <div class="users">
-                    <h1 class="box-title">Users </h1>
+                    <h1 class="box-title">Users <a href="{{ route('users.create') }}" class="btn btn-primary">Create</a></h1>
 
                     <div class="users__wrapper">
                         <table class="table">

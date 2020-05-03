@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use App\Repositories\Role\RoleRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
 use App\User;
@@ -34,6 +35,26 @@ class UsersController extends Controller
     {
         $users = $this->userRepository->getAll();
         return view('admin.users.index',  ['users' => $users]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        $roles = $this->roleRepository->getAll();
+        return view('admin.users.create', ['roles' => $roles, 'model' => new User()]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\PageRequest
+     */
+    public function store(UserRequest $request)
+    {
+        $this->userRepository->create($request->all(), $request->roles);
+        return redirect()->route('users.index')->with('success', 'User Created successfully.');
     }
 
     /**

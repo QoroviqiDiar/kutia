@@ -21,4 +21,8 @@ class RoleRepository implements RoleRepositoryInterface
         return $this->model->all();
     }
 
+    public function findById($id)
+    {
+        return $this->model->find($id);
+    }
 }

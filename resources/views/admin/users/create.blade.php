@@ -4,17 +4,11 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="page-create">
-                    <h1 class="page-create__title">
-                        Edit Page aaa
-                    </h1>
+                <h1>Create User</h1>
 
-                    <div class="page-create__form">
-                        <form action="{{ route('pages.store') }}" method="POST">
-                            @include('admin.pages.partials.fields')
-                        </form>
-                    </div>
-                </div>
+                <form action="{{ route('users.store') }}" method="POST">
+                    @include('admin.users.partials.fields')
+                </form>
             </div>
         </div>
     </div>
