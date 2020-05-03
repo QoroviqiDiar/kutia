@@ -12,6 +12,9 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>tinymce.init({selector:'textarea'});</script>
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -64,6 +67,12 @@
 
                             </li>
                         @endcan
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link" href="{{ route('files.index') }}">
+                                Files <span class="caret"></span>
+                            </a>
+
+                        </li>
                     @endguest
                 </ul>
 
@@ -93,6 +102,9 @@
                                     @csrf
                                 </form>
                             </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
                         </li>
                     @endguest
                 </ul>

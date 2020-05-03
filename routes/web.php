@@ -17,7 +17,7 @@ Route::get('/', 'HomeController@index');
 
 Route::get('/admin', function () {
     return view('admin.index');
-})->middleware('admin');
+})->middleware('admin')->name('dashboard');
 
 Auth::routes(['register' => false]);
 
